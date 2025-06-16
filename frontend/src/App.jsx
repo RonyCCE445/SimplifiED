@@ -9,9 +9,10 @@ import LearnMore from './pages/LearnMore';
 import Footer from './components/Footer';
 import QNA from './pages/QNA'; 
 import Readability from './pages/Readability';
-import Keypoints from './pages/KeyPoints';
 import KeyPoints from './pages/KeyPoints';
-
+import About from './pages/About';
+import Contact from './pages/Contact';
+import './styles/global.css'; // Ensure global styles are imported
 const App = () => {
   return (
     <>
@@ -24,6 +25,8 @@ const App = () => {
          <Route path="/qna" element={<QNA />} />
          <Route path="/readability" element={<Readability />} />
          <Route path="/keypoints" element={<KeyPoints />} />
+         <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         {/* Add more routes later: */}
        
       </Routes>

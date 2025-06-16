@@ -1,10 +1,22 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const dropdownRef = useRef();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = savedTheme === 'dark';
+    if (prefersDark) {
+      setDarkMode(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -16,8 +28,15 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const toggleTheme = () => {
+    const newTheme = darkMode ? 'light' : 'dark';
+    setDarkMode(!darkMode);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/" className="nav-logo">
         simplifi<span>ED</span>
       </Link>
@@ -27,8 +46,8 @@ const Navbar = () => {
         <Link to="/contact">Contact</Link>
 
         <div className="nav-item" ref={dropdownRef}>
-          <span onClick={() => setShowDropdown(!showDropdown)} style={{ cursor: 'pointer' }}>
-            Features
+          <span onClick={() => setShowDropdown(!showDropdown)}>
+            Features ▾
           </span>
           {showDropdown && (
             <div className="dropdown">
@@ -38,12 +57,13 @@ const Navbar = () => {
               <Link to="/readability">Readability</Link>
               <Link to="/keypoints">Key Points</Link>
               <Link to="/qna">Q&A Generator</Link>
-
             </div>
           )}
         </div>
 
-        <span style={{ color: 'var(--muted)', cursor: 'not-allowed' }}>🌓</span>
+        <span className="theme-toggle-icon" onClick={toggleTheme}>
+          {darkMode ? '🌞' : '🌙'}
+        </span>
       </div>
     </nav>
   );

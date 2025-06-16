@@ -17,14 +17,17 @@ const Home = () => {
   return (
     <div className="home-container fade-in">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1rem' }}>
-        <img src="/logo192.png" alt="Logo" style={{ width: '50px', height: '50px' }} />
+        <img src="/public/simplifiED_logo1.png" alt="Logo" style={{ width: '100px', height: '100px' }} />
         <h1 className="home-title" style={{ margin: 0 }}>
           simplifi<span className="accent">ED</span>
         </h1>
       </div>
 
       <p className="home-subtitle">
-        Decode difficult content, extract meaning, and study smarter — all in one assistant.
+        Welcome to SimplifiED — your AI-powered cognitive reading assistant.
+        Navigate through complex texts with ease as we break down, summarize, define, and explain content in seconds.
+        From key insights to question generation,
+        SimplifiED is crafted to enhance comprehension and empower every learner to read smarter, not harder.
       </p>
 
       <div className="card-grid">

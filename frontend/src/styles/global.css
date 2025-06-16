@@ -1,13 +1,55 @@
 /* src/styles/global.css */
+/* === Root Variables (Light Theme) === */
 :root {
+  /* Core Colors */
   --primary: #2C3E50;
   --accent: #1ABC9C;
+
+  /* Text & Background */
   --background: #F5F5F5;
   --text: #2C3E50;
   --muted: #BDC3C7;
+  --text-color: #1e1e1e;
+    
+  --bg-color: #F1F4F8;
+
+  /* Navbar */
+  --nav-text: #2E4057;
+  --nav-hover-bg: #5B7DB1;
+  --nav-hover-text: #F1F4F8;
+
+  /* UI Elements */
+  --hover-bg: #e0e0e0;
   --card-bg: #ffffff;
   --card-shadow: rgba(0, 0, 0, 0.1);
 }
+/* === Dark Theme Variables === */
+[data-theme='dark'] {
+  --bg-color: #121924;
+  --text-color: #D3D6DA;
+  --accent-color: #4F709C;
+    --card-bg: #1e1e1e;
+      --border-color: #333333;
+  --hover-bg: #1E2A47;
+}
+/* global.css */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+   background-color: var(--background);
+  color: var(--text);
+}
+
+.container, .main-wrapper, #root {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
 
 html {
   scroll-behavior: smooth;
@@ -24,54 +66,123 @@ a {
   color: inherit;
 }
 
+
+
+/* Navbar container */
+/* Navbar container */
 nav {
-  background-color: white;
-  border-bottom: 1px solid var(--muted);
-  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
+  background-color: #1B263B; /* Dark Blue Academia shade */
+
   align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--bg-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+/* Match navbar logo font to homepage title */
 .nav-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-family: 'Georgia', serif;
+  font-size: 2rem;       /* same as .home-title */
+  font-weight: bold;       /* same as .home-title */
+  color: var(--text);      /* dark text color */
+  user-select: none;
+  text-decoration: none;
+  line-height: 1;          /* to vertically align nicely */
 }
 
 .nav-logo span {
-  color: var(--accent);
+  color: var(--accent);    /* same as .accent */
 }
 
+/* Nav links container */
 .nav-links {
   display: flex;
-  gap: 2rem;
   align-items: center;
+  gap: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* keep links clean & modern */
 }
 
+/* Links inside nav */
+.nav-links > a,
+.nav-item > span {
+  font-weight: 600;
+  color: var(--nav-text);
+  text-decoration: none;
+  position: relative;
+  user-select: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* consistent nav text */
+  font-size: 1rem; /* keep it balanced and readable */
+}
+
+/* Hover bg and color on links and dropdown toggle */
+.nav-links > a:hover,
+.nav-item > span:hover {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-hover-text);
+  cursor: pointer;
+}
+
+/* Dropdown container */
 .nav-item {
   position: relative;
 }
 
+/* Dropdown menu styling */
 .dropdown {
   position: absolute;
-  top: 2.5rem;
-  background: white;
-  border: 1px solid var(--muted);
-  box-shadow: 0 2px 8px var(--card-shadow);
-  z-index: 10;
-  min-width: 160px;
+  top: 38px;
+  left: 0;
+  background: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  min-width: 190px;
   padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
 }
 
-.dropdown a {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: var(--primary);
+/* Dropdown links */
+.dropdown > a {
+  padding: 0.5rem 1.2rem;
+  color: var(--nav-text);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
 }
 
-.dropdown a:hover {
-  background-color: var(--accent);
-  color: white;
+/* Hover effect on dropdown items */
+.dropdown > a:hover {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-hover-text);
+}
+
+/* Muted icon style */
+.nav-links > span {
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Optional: subtle bg on hover for the disabled icon */
+.nav-links > span:hover {
+  background-color: rgba(91, 125, 177, 0.2);
 }
 
 /* Cards */
@@ -144,7 +255,7 @@ nav {
 }
 
 .home-title {
-  font-size: 3.5rem;
+  font-size: 5.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   font-family: 'Georgia', serif;
@@ -163,7 +274,7 @@ nav {
 /* ===== Summarize Page Styles ===== */
 
 .summarize-container {
-  padding: 2rem;
+  padding: 2.5rem;
   max-width: 800px;
   margin: auto;
 }
@@ -216,7 +327,7 @@ nav {
 }
 
 .definitions-title {
-  font-size: 2rem;
+  font-size: 5.5rem;
   margin-bottom: 1rem;
   color: #2c3e50;
 }
@@ -313,32 +424,37 @@ nav {
 /*FOOTER*/
 
 .footer {
-  margin-top: 4rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding: 2rem 1rem;
-  background-color: #f8f9fa;
   text-align: center;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .footer-links a {
-  margin: 0 1rem;
-  color: #333;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.3s;
 }
 
 .footer-links a:hover {
+  color: var(--accent-color);
   text-decoration: underline;
 }
 
-.socials {
-  margin-top: 0.5rem;
-}
-
-.footer p {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #555;
+.footer .copyright {
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 /* ====== Quiz Page Styles ====== */
 
@@ -401,4 +517,104 @@ nav {
 .fade-in {
   animation: fadeInUp 1s ease-out;
   animation-fill-mode: both;
+}
+/* General Page Styling */
+.page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  line-height: 1.7;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Headings */
+.page h1, .page h2 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Paragraphs and Links */
+.page p {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.page ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.page a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page a:hover {
+  text-decoration: underline;
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.contact-form label {
+  margin-top: 1rem;
+  color: var(--text);
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-top: 0.3rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  color: var(--text);
+}
+
+.contact-form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contact-form button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Social Links */
+.social-links {
+  margin-top: 2rem;
+}
+
+.social-links ul {
+  display: flex;
+  gap: 1rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.social-links a {
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.social-links a:hover {
+  background-color: var(--accent);
+  color: white;
+  border-color: var(--accent);
 }
