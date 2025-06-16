@@ -7,7 +7,7 @@ from routes.define import bp as define_bp
 from routes.learnmore import bp as learnmore_bp
 from routes.qa import bp as qa_bp
 from routes.readability import bp as readability_bp
-from routes.ner import bp as ner_bp
+from routes.keypoints import bp as keypoints_bp
 import nltk
 
 # Download necessary resources only once
@@ -32,7 +32,7 @@ app.register_blueprint(define_bp)
 app.register_blueprint(learnmore_bp)
 app.register_blueprint(qa_bp)
 app.register_blueprint(readability_bp)
-app.register_blueprint(ner_bp)
+app.register_blueprint(keypoints_bp)
 
 @app.route("/", methods=["GET"])
 def root():

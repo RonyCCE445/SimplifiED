@@ -36,7 +36,7 @@ const Navbar = () => {
               <Link to="/define">Definition Finder</Link>
               <Link to="/learnmore">Learn More About Topic</Link>
               <Link to="/readability">Readability</Link>
-              <Link to="/entities">Named Entities</Link>
+              <Link to="/keypoints">Key Points</Link>
               <Link to="/qna">Q&A Generator</Link>
 
             </div>

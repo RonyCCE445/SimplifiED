@@ -9,7 +9,8 @@ import LearnMore from './pages/LearnMore';
 import Footer from './components/Footer';
 import QNA from './pages/QNA'; 
 import Readability from './pages/Readability';
-import Entities from './pages/Entities';
+import Keypoints from './pages/KeyPoints';
+import KeyPoints from './pages/KeyPoints';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/learnmore" element={<LearnMore />} />
          <Route path="/qna" element={<QNA />} />
          <Route path="/readability" element={<Readability />} />
-         <Route path="/entities" element={<Entities />} />
+         <Route path="/keypoints" element={<KeyPoints />} />
         {/* Add more routes later: */}
        
       </Routes>

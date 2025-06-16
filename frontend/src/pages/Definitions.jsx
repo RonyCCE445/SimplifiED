@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 const Definitions = () => {
   const [inputText, setInputText] = useState("");
   const [definitions, setDefinitions] = useState([]);
@@ -38,14 +37,18 @@ const Definitions = () => {
   };
 
   return (
-    <div className="definitions-container">
-      <h2 className="definitions-title">Word Definition Finder</h2>
+    <div className="definitions-container fade-in">
+      <h2 className="definitions-title">
+        Get <span className="accent">Word Definitions</span>
+      </h2>
+
       <textarea
         className="definitions-textarea"
         placeholder="Paste your academic content here..."
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
       />
+
       <button className="definitions-button" onClick={handleDefine}>
         {loading ? "Fetching..." : "Get Definitions"}
       </button>
@@ -54,11 +57,11 @@ const Definitions = () => {
 
       {definitions.length > 0 && (
         <div className="definitions-result">
-          <h3>Definitions:</h3>
-          <ul>
+          <h3 className="definitions-title">Definitions:</h3>
+          <ul style={{ lineHeight: "1.6", paddingLeft: "1rem" }}>
             {definitions.map((def, index) => (
-              <li key={index}>
-                <strong>{def.word}</strong> ({def.pos}) – {def.definition}
+              <li key={index} style={{ marginBottom: "0.75rem" }}>
+                <strong>{def.word}</strong> <em>({def.pos})</em> — {def.definition}
               </li>
             ))}
           </ul>

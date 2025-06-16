@@ -6,11 +6,10 @@ bp = Blueprint("learnmore", __name__, url_prefix="/api")
 @bp.route("/learnmore", methods=["POST"])
 def learn_more():
     data = request.get_json()
-    entity = data.get("entity", "").strip()
-    ent_type = data.get("type", "").strip()
+    text = data.get("text", "").strip()
+    
+    if not text:
+        return jsonify({"message": "Text is required."}), 400
 
-    if not entity:
-        return jsonify({"message": "Entity is required."}), 400
-
-    explanation = generate_explanation(entity, ent_type)
+    explanation = generate_explanation(text)
     return jsonify({"explanation": explanation})

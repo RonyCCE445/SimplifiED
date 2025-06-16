@@ -4,16 +4,16 @@ import { useSearchParams } from 'react-router-dom';
 const LearnMore = () => {
   const [searchParams] = useSearchParams();
   const [inputText, setInputText] = useState('');
-  const [entityType, setEntityType] = useState('');
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const entityFromQuery = searchParams.get('entity');
-  const typeFromQuery = searchParams.get('type');
+  const topicFromQuery = searchParams.get('topic') || '';
+  const entityFromQuery = searchParams.get('entity') || '';
+  const typeFromQuery = searchParams.get('type') || '';
 
-  const fetchExplanation = async (entityText, type) => {
-    if (!entityText.trim()) {
+  const fetchExplanation = async (textToExplain) => {
+    if (!textToExplain.trim()) {
       setError('Please enter a topic or text.');
       return;
     }
@@ -26,7 +26,7 @@ const LearnMore = () => {
       const response = await fetch('http://localhost:5000/api/learnmore', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entity: entityText, type }),
+        body: JSON.stringify({ text: textToExplain }),
       });
 
       const data = await response.json();
@@ -43,38 +43,45 @@ const LearnMore = () => {
   };
 
   useEffect(() => {
-    if (entityFromQuery) {
-      setInputText(entityFromQuery);
-      setEntityType(typeFromQuery || '');
-      fetchExplanation(entityFromQuery, typeFromQuery || '');
+    const combinedQuery = topicFromQuery
+      ? topicFromQuery
+      : entityFromQuery
+      ? `${entityFromQuery} (${typeFromQuery || 'Entity'})`
+      : '';
+
+    if (combinedQuery) {
+      setInputText(combinedQuery);
+      fetchExplanation(combinedQuery);
     }
-  }, [entityFromQuery, typeFromQuery]);
+  }, [topicFromQuery, entityFromQuery, typeFromQuery]);
 
   const handleLearnMore = () => {
-    fetchExplanation(inputText, entityType);
+    fetchExplanation(inputText);
   };
 
   return (
-    <div className="learnmore-container" style={{ animation: 'fadeIn 0.6s ease-in' }}>
-      <h2>Learn More About the Topic</h2>
+    <div className="learnmore-container fade-in">
+      <h2 className="home-title">
+        Learn More <span className="accent">About the Topic</span>
+      </h2>
 
       <textarea
-        className="learnmore-textarea"
+        className="text-area"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        placeholder="Enter a topic or passage to learn more..."
+        placeholder="Enter a topic, passage, or entity to learn more..."
       />
 
-      <button className="learnmore-button" onClick={handleLearnMore}>
+      <button className="primary-btn" onClick={handleLearnMore}>
         {loading ? 'Loading...' : 'Learn More'}
       </button>
 
-      {error && <p className="learnmore-error">{error}</p>}
+      {error && <p className="learnmore-error" style={{ color: 'red' }}>{error}</p>}
 
       {explanation && (
         <div className="learnmore-output">
-          <h3>Explanation:</h3>
-          <p>{explanation}</p>
+          <h3 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Explanation:</h3>
+          <p style={{ lineHeight: '1.7', fontFamily: 'Georgia, serif' }}>{explanation}</p>
         </div>
       )}
     </div>

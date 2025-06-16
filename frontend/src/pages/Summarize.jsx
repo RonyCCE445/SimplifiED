@@ -1,4 +1,3 @@
-// src/pages/Summarize.jsx
 import React, { useState } from 'react';
 import '../styles/global.css';
 
@@ -20,7 +19,6 @@ const Summarize = () => {
 
     try {
       const response = await fetch('http://localhost:5000/api/summarize', {
-
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: inputText }),
@@ -40,23 +38,27 @@ const Summarize = () => {
   };
 
   return (
-    <div className="summarize-container">
-      <h2>Summarize Text</h2>
+    <div className="home-container fade-in">
+      <h2 className="home-title">
+        Text <span className="accent">Summarizer</span>
+      </h2>
+
       <textarea
-        className="summarize-textarea"
+        className="text-area"
         placeholder="Paste your academic content here..."
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
       />
-      <button className="summarize-button" onClick={handleSummarize}>
+
+      <button className="primary-btn" onClick={handleSummarize}>
         {loading ? 'Summarizing...' : 'Summarize'}
       </button>
 
-      {error && <p className="summarize-error">{error}</p>}
+      {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
       {summary && (
-        <div className="summarize-result">
-          <h3>Summary:</h3>
+        <div className="card fade-in" style={{ marginTop: '1.5rem' }}>
+          <h4 className="accent" style={{ marginBottom: '0.5rem' }}>Summary:</h4>
           <p>{summary}</p>
         </div>
       )}
